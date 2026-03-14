@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Recibo #<%= pedido.id %></title>
+    <style>
+        body { font-family: 'Courier New', monospace; padding: 20px; }
+        .recibo { max-width: 400px; margin: auto; border: 1px solid #000; padding: 15px; }
+        .topo { text-align: center; border-bottom: 1px dashed #000; margin-bottom: 10px; }
+        .item { display: flex; justify-content: space-between; margin: 5px 0; }
+        .total { border-top: 1px solid #000; font-weight: bold; margin-top: 10px; padding-top: 10px; font-size: 1.2rem; }
+        .btn { display: block; text-align: center; background: #000; color: #fff; padding: 10px; margin-top: 20px; text-decoration: none; }
+        @media print { .btn { display: none; } }
+    </style>
+</head>
+<body>
+    <div class="recibo">
+        <div class="topo">
+            <h2>LUCAS OMNI FASHION</h2>
+            <p>Comprovante de Pedido</p>
+            <p><%= new Date(pedido.data).toLocaleString('pt-BR') %></p>
+        </div>
+        <div>
+            <% pedido.itens.forEach(i => { %>
+                <div class="item">
+                    <span><%= i.nome %></span>
+                    <span>R$ <%= i.preco.toFixed(2) %></span>
+                </div>
+            <% }) %>
+        </div>
+        <div class="total item">
+            <span>TOTAL:</span>
+            <span><%= pedido.total %></span>
+        </div>
+        <p style="text-align:center; font-size: 0.8rem; margin-top: 20px;">Obrigado pela compra!</p>
+    </div>
+    <a href="javascript:window.print()" class="btn">Imprimir / Salvar PDF</a>
+</body>
+</html>

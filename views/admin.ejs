@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Admin - Loja</title>
+    <link rel="stylesheet" href="/style.css">
+    <style>
+        .container { max-width: 900px; margin: 20px auto; padding: 20px; font-family: sans-serif; }
+        .card { background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); margin-bottom: 30px; }
+        input { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; }
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        th, td { padding: 12px; border: 1px solid #eee; text-align: left; }
+        th { background: #fdf2f8; }
+        .btn-add { background: #28a745; color: white; border: none; padding: 10px 20px; cursor: pointer; }
+        .btn-del { background: #dc3545; color: white; border: none; padding: 5px 10px; cursor: pointer; }
+        .btn-view { color: #d63384; text-decoration: none; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header style="display: flex; justify-content: space-between; align-items: center;">
+            <h1>Painel Administrativo</h1>
+            <a href="/logout" style="color: red;">Sair</a>
+        </header>
+
+        <div class="card">
+            <h3>Novo Produto</h3>
+            <form action="/admin/add" method="POST">
+                <input type="text" name="nome" placeholder="Nome da Roupa" required>
+                <input type="number" name="preco" step="0.01" placeholder="Preço (R$)" required>
+                <input type="text" name="img" placeholder="URL da Imagem" required>
+                <button type="submit" class="btn-add">Cadastrar Produto</button>
+            </form>
+        </div>
+
+        <div class="card">
+            <h3>Estoque Atual</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Preço</th>
+                        <th>Ação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% produtos.forEach(p => { %>
+                        <tr>
+                            <td><%= p.nome %></td>
+                            <td>R$ <%= p.preco.toFixed(2) %></td>
+                            <td>
+                                <form action="/admin/delete/<%= p.id %>" method="POST">
+                                    <button class="btn-del">Excluir</button>
+                                </form>
+                            </td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="card">
+            <h3>Últimos Pedidos</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>Total</th>
+                        <th>Recibo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% pedidos.reverse().forEach(ped => { %>
+                        <tr>
+                            <td><%= new Date(ped.data).toLocaleDateString('pt-BR') %></td>
+                            <td><%= ped.total %></td>
+                            <td><a href="/recibo/<%= ped.id %>" target="_blank" class="btn-view">Ver PDF</a></td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Login - Admin</title>
+    <link rel="stylesheet" href="/style.css">
+    <style>
+        .login-card { max-width: 300px; margin: 100px auto; padding: 30px; background: #fff; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); text-align: center; }
+        input { width: 100%; padding: 12px; margin: 8px 0; box-sizing: border-box; }
+        button { background: #d63384; color: white; border: none; padding: 12px; width: 100%; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="login-card">
+        <h2>Entrar</h2>
+        <% if(erro) { %> <p style="color:red"><%= erro %></p> <% } %>
+        <form action="/login" method="POST">
+            <input type="text" name="usuario" placeholder="Usuário" required>
+            <input type="password" name="senha" placeholder="Senha" required>
+            <button type="submit">Acessar Painel</button>
+        </form>
+    </div>
+</body>
+</html>

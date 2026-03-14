@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1700000000001,
+    "nome": "Vestido Verão Floral",
+    "preco": 129.9,
+    "img": "https://via.placeholder.com/400"
+  },
+  {
+    "id": 1700000000002,
+    "nome": "Blusa Seda Off-White",
+    "preco": 89.9,
+    "img": "https://via.placeholder.com/400"
+  }
+]

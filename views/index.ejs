@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sua Loja Feminina | Node.js</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo">LUCAS OMNI FASHION</div>
+        <div class="cart-icon" onclick="toggleCart()">
+            <i class="fas fa-shopping-bag"></i>
+            <span id="cart-count">0</span>
+        </div>
+    </header>
+
+    <main>
+        <div class="vitrine">
+            <% produtos.forEach(produto => { %>
+                <div class="product-card">
+                    <img src="<%= produto.img %>" alt="<%= produto.nome %>">
+                    <h3><%= produto.nome %></h3>
+                    <p>R$ <%= produto.preco.toFixed(2) %></p>
+                    <button class="btn-add" onclick="addToCart('<%= produto.nome %>', <%= produto.preco %>)">
+                        Adicionar ao Carrinho
+                    </button>
+                </div>
+            <% }) %>
+        </div>
+    </main>
+
+    <div id="cart-sidebar" class="cart-sidebar">
+        <div class="cart-header">
+            <h3>Meus Pedidos</h3>
+            <span class="close" onclick="toggleCart()">&times;</span>
+        </div>
+        <div id="cart-items"></div>
+        <div class="cart-footer">
+            <p>Total: <span id="cart-total">R$ 0,00</span></p>
+            <button class="btn-whatsapp" onclick="enviarWhatsApp()">
+                <i class="fab fa-whatsapp"></i> Finalizar Pedido
+            </button>
+        </div>
+    </div>
+
+    <script src="/script.js"></script>
+</body>
+</html>
